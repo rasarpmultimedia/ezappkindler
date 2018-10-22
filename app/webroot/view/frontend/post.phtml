@@ -1,0 +1,14 @@
+      <?php include_once PARTIALS.'header.phtml';
+        $html = new \engine\lib\HTMLHelper; ?>
+      <h1><?php echo $view->view_data["title"] ?></h1>  
+      <p><?php  echo $view->getView("message") ?></p>
+      <p><?php  echo $this->view_data["developer"] ?></p>
+      <p><?php echo $html::hyperlink("Article", "home/article/23") ?></p>
+      <!--Loop data -->
+      <ul id="list_data">
+      <?php foreach ($view->view_data["db_list"] as $result): ?>
+          <li><?php echo $result ?></li>
+      <?php endforeach; ?>
+      </ul>
+      <?php  var_dump($this); ?>
+      <?php include_once PARTIALS.'footer.phtml'; ?>

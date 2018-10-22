@@ -1,0 +1,5 @@
+setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+setRequestHeader("Content-type", "form/multipart");
+
+enctype="multipart/form-data"
+enctype="application/x-www-form-urlencoded"

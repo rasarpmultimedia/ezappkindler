@@ -1,0 +1,11 @@
+{
+    "name": "rasarpmultimedia/ezappkindler",
+    "description": "ezAppKindler is a Rapid Application Development (RAD) framework developed in PHP implementing MVC architecture and has many build-in libraries to make web development easier and faster.",
+    "authors": [
+        {
+            "name": "Sarpong Abdul-Rahman Dugbatey",
+            "email": "fadanash@gmail.com"
+        }
+    ],
+    "require": {}
+}

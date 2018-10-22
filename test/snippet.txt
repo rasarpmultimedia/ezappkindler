@@ -1,0 +1,190 @@
+         
+
+
+$html = new HtmlHelper;
+$table = [
+		 "table-row"=>[
+			 "table-head"=>["Col1-Head1","C2-Head2","Col-Head3","Col4-Head4","Col5-Head5"],
+			 "table-data"=>[
+				 ["col1-row1","col1-row2","col1-row3","col1-row4","col1-row5"],
+				 ["col2-row1","col2-row2","col2-row3","col2-row4","col2-row5"],
+				 ["col3-row1","col3-row2","col3-row3","col3-row4","col3-row5"],
+				 ["col4-row1","col4-row2","col4-row3","col4-row4","col4-row5"],
+				 ["col5-row1","col5-row2","col5-row3","col5-row4","col5-row5"]
+				 ]
+			
+			 ]
+		];
+
+ //echo $html->table($table,"class=\"table\"");
+//echo $html->table($table);
+foreach(userinfo as user){
+    $data[] = [$user->FirstName,$user->LastName,$user->Age,$Gender,"actionlinks"]//append to table-data
+}
+$table = [
+		 "table-row"=>[
+			 "table-head"=>["Col1-Head1","Col2-Head2","Col-Head3","Col4-Head4","Col5-Head5"],
+			 "table-data"=>$data
+             ]
+		];
+
+ //echo $html->table($table,"class=\"table\"");
+ //echo $html->table($table);
+
+ //Index Page 
+
+ <?php
+
+
+// Form 
+
+    /* Edit Variables */
+        $action   = $model->request->action;
+        $process  = $model->process; //process form;
+        $validate = $model->validate;//validate form
+        $model->addMemberModel();
+
+		if($action==="profile"){
+		//Edit Variable form database
+	    $lastname    = $model->form_data["lastname"];
+		$firstname   = $model->form_data["firstname"];
+		$gender      = $model->form_data["gender"];
+		$phone_number= $model->form_data["phone_number"];
+		$profileimg  = $model->form_data["profileimg"];
+		$username    = $model->form_data["username"];
+		$email       = $model->form_data["email"];
+		$sec_question= $model->form_data["security_question"];
+		$answer = $model->form_data["answer"];
+		//$password    = $model->form_data["password"];
+		//$accesslevel = $model->form_data["accesslevel"];
+		}else{
+        //Edit Variable form database
+        $lastname    = "";
+		$firstname   = "";
+		$gender      = "";
+		$phone_number= "";
+		$profileimg  = "";
+		$username    = "";
+		$email       = "";
+		//$accesslevel = "";
+		$password  = "";
+        }
+        /* Edit Variables */
+        $auth = $GLOBALS["auth"];
+        $id = isset($model->request->id)?$model->request->id:$auth->userid;
+		$formaction = ($action=="profile")?"member/{$id}/profile":"member/profile";
+		
+		$header=$title=$content=$adm_nav=$footer='';
+
+		/*Information */
+		if($process->successflag==true){
+            $process->message($process->post("firstname")."'s information is updated");
+        }
+      
+		$form = new BuildForm("member_profile",filter_var($_SERVER["PHP_SELF"].QUERY_STRING."{$formaction}" ),"post","enctype=\"multipart/form-data\" class=\"form-horizontal form-material\" ");
+		//Firstname
+		$form->createInputField(["label"=>"Firstname","labelattr"=>"class=\"col-md-12\"",
+        "type"=>"text","name"=>"firstname","value"=>$firstname,"optionalattr"=>" class=\"form-control form-control-line\" required"],
+        $validate->displayError($process->errorinfo,"firstname"));//required
+		//Lastname
+		$form->createInputField(["label"=>"Lastname","labelattr"=>"class=\"col-md-12\"",
+				"type"=>"text","name"=>"lastname","value"=>$lastname,"optionalattr"=>" class=\"form-control form-control-line\" required"],$validate->displayError($process->errorinfo,"lastname"));//required
+		//Gender
+        $form->createSelectField(["label"=>"Gender","labelattr"=>"class=\"col-md-12\"","optionalattr"=>"class=\"form-control form-control-line\" ",
+                              "name"=>"gender","value"=>$gender, "options"=>["M"=>"Male","F"=>"Female"]]);
+
+		/** Phone Number */				  
+		$form->createInputField(["label"=>"Phone Number", "labelattr"=>"class=\"col-md-12\"",
+					"type"=>"text","name"=>"phone_number","value"=>$phone_number,"optionalattr"=>"class=\"form-control form-control-line\" required"],$validate->displayError($process->errorinfo,"phone_number"));//
+        
+        //Email					  
+		$form->createInputField(["label"=>"Email", "labelattr"=>"class=\"col-md-12\"",
+					"type"=>"text","name"=>"email","value"=>$email,"optionalattr"=>"class=\"form-control form-control-line\" required"],$validate->displayError($process->errorinfo,"email"));//
+
+         /** Upload Profile Image **/
+        $form->createUploadField(
+            ["label"=>"Upload Your Profile Picture", "id"=>"profileimg", "name"=>"profileimg",
+            "optionalattr"=>"class=\"form-control form-control-line\" "],
+            $validate->displayError($process->errorinfo,"profileimg"));
+            
+		//Password					  
+		$form->createInputField(["label"=>"Change Password", "labelattr"=>"class=\"col-md-12\"",
+					"type"=>"password","name"=>"password","value"=>"","optionalattr"=>" class=\"form-control form-control-line\" "],$validate->displayError($process->errorinfo,"password"));
+		//Confirm Password						  
+		$form->createInputField(["label"=>"Confirm Password", "labelattr"=>"class=\"col-md-12\"",
+        "type"=>"password","name"=>"cpassword","value"=>"","optionalattr"=>" class=\"form-control form-control-line\" "],$validate->displayError($process->errorinfo,"cpassword"));
+         
+          //Security Question
+        $form->createSelectField(["label"=>"Security Question","labelattr"=>"class=\"col-md-12\"","optionalattr"=>"class=\"form-control form-control-line\" ",
+                              "name"=>"security_question","value"=>$sec_question, 
+                              "options"=>[
+                                  "What is favourate techers name?"=>"What is favourate techers name?",
+                                  "What is your mother's last name?"=>"What is your mother's last name?",
+                                  "Which year did you complate high school?"=>"Which year did you complate high school?"]
+                                  ]);
+        //Confirm Password						  
+		$form->createInputField(["label"=>"Answer", "labelattr"=>"class=\"col-md-12\"",
+          "type"=>"text","name"=>"answer","value"=>$answer,"optionalattr"=>" class=\"form-control form-control-line\" "],$validate->displayError($process->errorinfo,"answer"));
+         //Gender
+          
+		//Submit						  
+		$form->createInputField(["type"=>"submit","name"=>"submit","value"=>"Update Profile","optionalattr"=>"class=\"btn btn-success\" "]);
+		
+		$form_output ='';
+		$collections = $form->customFormCollections();
+		$form_output .= isset($model->form_data["message"])?$model->form_data["message"]:"";
+		foreach($collections as $label=>$data){
+				if(is_numeric($label)){
+					$error = $data["error"]<>null?"<div class=\"text-error\">{$data["error"]}</div>":"";
+						$form_output .="<div class=\"form-group\"><div class=\"col-md-12\">{$data["input"]}{$error}</div>";
+				}else{
+					$error = $data["error"]<>null?"<div class=\"text-error\">{$data["error"]}</div>":"";
+						$form_output .="<div class=\"form-group\">{$label}<div class=\"col-md-12\">{$data["input"]}<br />{$error}</div></div>";
+				}
+    }
+  
+ 		return $form->DisplayCustomForm($form_output);
+
+
+//index page Variable
+
+<?php
+$model = $this->setmodel; //model object
+$auth = $this->setauth;//auth object
+$util = $model->util;
+//$process  = $model->process; //process form;
+//$validate = $model->validate;//validate form
+$html = new HTMLHelper;
+$INCLUDE_SCRIPT = $html->addScripts(["",
+	//BASE_URL."app/_scripts/ckeditor.js",
+	//BASE_URL."app/_scripts/ajax.js"
+	]);
+	
+$model->dataModel();
+//$model->loginModel();
+//Login and Check for Access Level
+//var_dump($auth->isLoggedIn());
+if(!$auth->isLoggedIn()){
+   $util->redirectTo(BASE_URL."".QUERY_STRING."admin/login");
+}elseif(!($auth->isAdmin()||$auth->isModerator()||$auth->isEditor() || $auth->isUser())){
+   $util->redirectTo(BASE_URL."".QUERY_STRING."admin/login");
+}
+
+$header = $title = $nav = $scroller = $content = $footer = '';
+include_once "admheader.view.phtml";
+include_once "admin.nav.phtml";
+include_once "admtest_cont.phtml";
+//include_once "footer.view.phtml";
+
+$content =$test_content_blank;
+
+$title="ILAPI-Admin Area";
+
+$data = [
+	"Title"=>$title,
+	"HeaderTop"=>$headertop($model),
+	"MainNav"=>$admin_nav,
+	"Content"=>$content,
+	//"Footer"=>$footer,
+	"Scripts"=>$INCLUDE_SCRIPT
+];

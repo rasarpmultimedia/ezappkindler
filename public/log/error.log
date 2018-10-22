@@ -1,0 +1,24 @@
+Error Code: 0
+An Error Occured: Class Name Blog_Model does not exist please... in C:\xampp\htdocs\ezappkindler\engine\core\controller.class.php
+ on Line Number 29
+Trace: #0 C:\xampp\htdocs\ezappkindler\app\webroot\controller\home_controller.php(10): engine\core\Controller->model(Array)
+#1 [internal function]: Home_Controller->index()
+#2 C:\xampp\htdocs\ezappkindler\engine\core\router.class.php(25): call_user_func_array(Array, Array)
+#3 C:\xampp\htdocs\ezappkindler\engine\core\router.class.php(17): engine\core\Router->loadController()
+#4 C:\xampp\htdocs\ezappkindler\engine\core\dispatcher.class.php(7): engine\core\Router->__construct(Object(engine\core\Registry), '\\/?(?<controlle...')
+#5 C:\xampp\htdocs\ezappkindler\index.php(5): engine\core\Dispatcher->__construct(Object(engine\core\Registry), '\\/?(?<controlle...')
+#6 {main}
+File:  C:\xampp\htdocs\ezappkindler\engine\core\controller.class.php
+on Line Number: 29
+Error Code: 0
+An Error Occured: Class Name Blog_Model does not exist please... in C:\xampp\htdocs\ezappkindler\engine\core\controller.class.php
+ on Line Number 29
+Trace: #0 C:\xampp\htdocs\ezappkindler\app\webroot\controller\home_controller.php(10): engine\core\Controller->model(Array)
+#1 [internal function]: Home_Controller->index()
+#2 C:\xampp\htdocs\ezappkindler\engine\core\router.class.php(25): call_user_func_array(Array, Array)
+#3 C:\xampp\htdocs\ezappkindler\engine\core\router.class.php(17): engine\core\Router->loadController()
+#4 C:\xampp\htdocs\ezappkindler\engine\core\dispatcher.class.php(7): engine\core\Router->__construct(Object(engine\core\Registry), '\\/?(?<controlle...')
+#5 C:\xampp\htdocs\ezappkindler\index.php(5): engine\core\Dispatcher->__construct(Object(engine\core\Registry), '\\/?(?<controlle...')
+#6 {main}
+File:  C:\xampp\htdocs\ezappkindler\engine\core\controller.class.php
+on Line Number: 29

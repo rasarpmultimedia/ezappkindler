@@ -1,0 +1,70 @@
+A lot of PHP developers know how to GET data with file_get_contents(). Pretty straight-forward:
+
+$output = file_get_contents($url);
+
+But, what about posting data.
+
+Know how to do that?
+
+If not, here's an example:
+
+// Setup
+$url = 'http://localhost/output.php';
+$data = array(
+  'i' => 'think',
+  'john' => 'morris',
+  'is' => 'awesome',
+);
+
+// Set options
+$options = array(
+  'http' => array(
+    'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+    'method' => 'POST',
+    'content' => http_build_query($data), // param=value
+    // 'ignore_errors' => true,
+  ),
+);
+
+// Create the stream context
+$context = stream_context_create($options);
+
+// Send the request
+$result = file_get_contents($url, false, $context);
+
+// Check for errors
+if ($result === FALSE) {
+  // Handle any errors
+}
+
+print_r($result);
+
+And, in the URL the data is submitted to:
+
+print_r($_POST).
+
+What you'll get back, then, from this request is an array of the data you submitted to output.php. Of course, in real-life, this could be an API, another part of your application, etc... that actually processes your data in some way and returns it to you.
+
+Yes, you usually do this with cURL.
+
+But, some servers don't have cURL installed.
+
+So, if you're writing an app you'll distribute. You'd want to create an HTTP class that handles these sorts of requests... trying cURL first and falling back to file_get_contents() if cURL isn't installed.
+
+Anyway, I explain all this and show you how to use this code in Lesson 9 of Module 2 of PHP 101. If you wanna master PHP so you land an IT job or make yourself more valuable in your current one, do this now: http://www.johnmorrisonline.com/php
+
+It is thee place to learn PHP.
+
+That said, it's not for the uncommitted.
+
+Like anything worth doing, it takes work.
+
+So, if you're not ready to buckle down and make this happen...
+
+Move along.
+
+For the rest of you, go here: http://www.johnmorrisonline.com/php
+
+Later,
+
+John
