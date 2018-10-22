@@ -25,7 +25,7 @@ abstract class Model{
         $this->util    = new Utility;
 	$this->process = new ProcessForm;	
         $this->validate= $this->process->validate();
-        $this->data  = !empty($this->data)?$this->data:[];
+        $this->collections  = !empty($this->collections)?$this->collections:[];
         static::$params = !empty($params) ? $params : null;
     }
     

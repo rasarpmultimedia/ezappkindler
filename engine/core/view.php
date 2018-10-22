@@ -8,14 +8,15 @@ namespace engine\core;
     public static $SET_TEMPLATE;
     const DS = DIRECTORY_SEPARATOR;
 
-    public function __construct($filename='',$data = array()){
+    public function __construct($filename,array $data){
         $this->view_file = !empty($filename)?$filename:"";
         $this->view_data = (is_array($data)?$data:[]);
         self::$TEMPLATE_DIR = self::$SET_TEMPLATE;
-        $this->blocks = array_merge($this->blocks, $this->view_data);
+        //array_push($this->blocks, $this->view_data);
+        $this->blocks = $this->view_data;
     }
     
-    protected function setView($key,$value){
+    public function setView($key,$value){
         if(array_key_exists($key, $this->view_data)){$this->view_data[$key] = $value;}
         return true;
     }
@@ -24,10 +25,9 @@ namespace engine\core;
        return array_key_exists($key, $this->view_data)?$this->view_data[$key]:null;
     }
     
-    public function setHTMLBlocks($key,$value){
-     if(array_key_exists($key, $this->blocks)){$this->blocks[$key] = $value;}
-        return true;   
-    }
+    public function setHTMLBlock($key,$value){
+        if(!array_key_exists($key, $this->blocks)){return $this->blocks[$key] = $value;}        
+     }
     public function getHTMLBlock($key){
         return array_key_exists($key, $this->blocks)?$this->blocks[$key]:null;
     }
