@@ -7,7 +7,7 @@ Released Date: 20 - 01 - 2018
 Developer: Sarpong Abdul-Rahman D. for Rasarp Multimedia Inc.
 Country: Ghana.
 Contact: +233271957502/+233269063879
-Email : rasarpmultimedia@gmail.com
+Email : fadanash@gmail.com
 License :GPL v3.0 Open Source License
 #############################################################
 
